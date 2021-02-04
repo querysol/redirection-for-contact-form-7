@@ -60,7 +60,7 @@ class WPCF7R_Action_Redirect extends WPCF7R_Action {
 				),
 				array(
 					'name'        => 'external_url',
-					'type'        => 'url',
+					'type'        => 'text',
 					'label'       => __( 'Use external URL', 'wpcf7-redirect' ),
 					'placeholder' => __( 'Use external URL', 'wpcf7-redirect' ),
 					'tooltip'     => __( 'You can build a custom url like this https://example.com/[your-name]?[your-email]&[your-tel]', 'wpcf7-redirect' ),

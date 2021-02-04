@@ -1,0 +1,36 @@
+{
+    "name": "cf7r-pro",
+    "version": "1.0.0",
+    "description": "Welcome to the official repository for Contact Form 7 Redirection WordPress plugin.",
+    "main": "gulpfile.js",
+    "dependencies": {
+        "graceful-fs": "^4.2.4",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-notify": "^3.2.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-rtlcss": "^1.4.1",
+        "gulp-uglify": "^3.0.2",
+        "gulp-zip": "^5.0.2",
+        "jquery-validation": "^1.19.2",
+        "magnific-popup": "^1.1.0"
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-replace": "^1.0.0"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/querysol/contact-form-7-redirection-pro.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/querysol/contact-form-7-redirection-pro/issues"
+    },
+    "homepage": "https://github.com/querysol/contact-form-7-redirection-pro#readme"
+}
