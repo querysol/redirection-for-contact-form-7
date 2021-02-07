@@ -41,7 +41,16 @@ var wpcf7_redirect_admin;
 			if ('undefined' !== typeof tinymce && 'undefined' !== typeof tinyMCEPreInit) {
 				editor_id = $editor_action_wrap.find('textarea').prop('id');
 
-				tinymce.init(tinyMCEPreInit.mceInit[editor_id]);
+				if (editor_id) {
+					try {
+						tinymce.init(editor_id, { selector: 'textarea' });
+						tinymce.execCommand('mceAddEditor', false, editor_id);
+						quicktags({ id: editor_id });
+
+					} catch (err) {
+						console.log(err);
+					}
+				}
 			}
 		}
 		this.init_colorpickers = function () {
@@ -659,7 +668,7 @@ var wpcf7_redirect_admin;
 			if ('wpcf7r_add_action' === action || 'wpcf7r_duplicate_action' == action) {
 				$('[data-wrapid=' + params.rule_id + '] #the_list').append(response.action_row);
 
-				$new_action_wrap = $('[data-wrapid=' + params.rule_id + '] #the_list tr:last-child').prev();
+				$new_action_wrap = $('[data-wrapid=' + params.rule_id + '] #the_list > tr').last();
 
 				_this.init_select2();
 				_this.renumber_rows();
@@ -1121,7 +1130,7 @@ var wpcf7_redirect_admin;
 		this.init();
 	}
 
-	$(document).ready(function ($) {
+	$(document).ready(function () {
 		//init the class functionality
 		wpcf7_redirect_admin = new Wpcf7_redirect_admin();
 

@@ -16,7 +16,7 @@ $toggler  = isset( $field['toggler'] ) ? $field['name'] : false;
 			<?php echo isset( $field['tooltip'] ) ? cf7r_tooltip( $field['tooltip'] ) : ''; ?>
 		</label>
 	<?php endif; ?>
-	<select class="" <?php echo $toggler ? "data-toggler-name='{$toggler}'" : ''; ?> name="wpcf7-redirect<?php echo $prefix; ?>[<?php echo $field['name']; ?>]" >
+	<select class="" <?php echo $toggler ? "data-toggler-name='{$toggler}'" : ''; ?> name="wpcf7-redirect<?php echo $prefix; ?>[<?php echo $field['name']; ?>]" data-name="<?php echo $field['name']; ?>">
 		<?php foreach ( $field['options'] as $option_key => $option_label ) : ?>
 			<?php
 				$selected = isset( $field['value'] ) && $field['value'] ? selected( $field['value'], $option_key, false ) : $selected;
