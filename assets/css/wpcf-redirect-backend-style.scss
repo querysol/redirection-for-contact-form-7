@@ -1,8 +1,8 @@
 // out: wpcf-redirect-backend-style.css, compress: false, sourceMap: false, autoprefixer: last 5 versions, groupmedia: true
 
-@import 'mixins';
+@import "mixins";
 
-.settings_page_wpc7_redirect .padbox form>div {
+.settings_page_wpc7_redirect .padbox form > div {
     display: none !important;
 
     &#setting-error-not-valid-serial {
@@ -30,7 +30,7 @@
     width: 100%;
     height: 100%;
     visibility: hidden;
-    background: url('../../build/images/loader.gif') 50% 50% rgba(255, 255, 255, .8) no-repeat;
+    background: url("../../build/images/loader.gif") 50% 50% rgba(255, 255, 255, 0.8) no-repeat;
     background-size: 50px;
     opacity: 0;
 
@@ -95,8 +95,8 @@ div#wpcf7r_leads {
         height: 60%;
         padding: 20px;
         border: 1px solid #d1d1d1;
-        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 
         .wpcfr-popup-wrap-content {
             height: 100%;
@@ -164,7 +164,7 @@ div#wpcf7r_leads {
                     display: block;
                     width: 5px;
                     height: 5px;
-                    content: '';
+                    content: "";
                     background: #65b1fc;
                     transform: translateY(-50%);
                 }
@@ -185,6 +185,38 @@ div#wpcf7r_leads {
 #extensions-panel,
 #leads-panel,
 #redirect-panel {
+    .image-container {
+        display: inline-block;
+        position: relative;
+        .image-remove-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 50%;
+            padding: 0;
+            margin: 0;
+            line-height: normal;
+            border: 0;
+            background: transparent;
+            height: 20px;
+            width: 20px;
+            span {
+                line-height: normal;
+                height: 20px;
+                width: 20px;
+                color: #fff;
+                display: inline-block;
+                padding: 0;
+                margin: 0;
+                background: #000;
+                border-radius: 50%;
+                &:before {
+                    top: -1px;
+                    position: relative;
+                }
+            }
+        }
+    }
     .success-message {
         padding: 10px;
         margin-bottom: 20px;
@@ -230,7 +262,7 @@ div#wpcf7r_leads {
         cursor: pointer;
 
         &:after {
-            opacity: .8;
+            opacity: 0.8;
         }
     }
 
@@ -316,7 +348,7 @@ div#wpcf7r_leads {
                 cursor: pointer;
 
                 &:hover {
-                    opacity: .8;
+                    opacity: 0.8;
                 }
             }
         }
@@ -363,7 +395,7 @@ div#wpcf7r_leads {
         background: #f9f9f9;
         border: 1px solid #555;
 
-        >label {
+        > label {
             margin-bottom: 0 !important;
         }
     }
@@ -371,7 +403,7 @@ div#wpcf7r_leads {
     .clearfix:after {
         display: block;
         clear: both;
-        content: '';
+        content: "";
     }
 
     .migrate-from-redirection,
@@ -398,7 +430,7 @@ div#wpcf7r_leads {
         }
     }
 
-    .actions-list tbody tr.action-container>td {
+    .actions-list tbody tr.action-container > td {
         border-bottom: 0 !important;
     }
 
@@ -410,7 +442,7 @@ div#wpcf7r_leads {
         }
 
         input:checked {
-            +.wpcf7r-on-off-button {
+            + .wpcf7r-on-off-button {
                 border: 2px solid #1f8cbe;
 
                 .wpcf7r-toggle-button {
@@ -467,7 +499,6 @@ div#wpcf7r_leads {
 
     .action-container {
         .wp-list-table-inner {
-
             td,
             th {
                 padding: 5px 10px;
@@ -503,7 +534,7 @@ div#wpcf7r_leads {
 
         tbody {
             tr[data-actionid] {
-                >td {
+                > td {
                     border-bottom: 1px solid #e1e1e1;
                 }
             }
@@ -526,7 +557,7 @@ div#wpcf7r_leads {
     .active {
         .open-tab {
             &.dashicons-arrow-down-alt2:before {
-                content: '\f343';
+                content: "\f343";
             }
         }
     }
@@ -543,7 +574,7 @@ div#wpcf7r_leads {
 
         &.active {
             .dashicons-plus-alt:before {
-                content: '\f460';
+                content: "\f460";
             }
         }
     }
@@ -556,7 +587,7 @@ div#wpcf7r_leads {
         &:after {
             display: block;
             clear: both;
-            content: '';
+            content: "";
         }
 
         .group-title {
@@ -636,7 +667,7 @@ div#wpcf7r_leads {
             &:after {
                 display: block;
                 clear: both;
-                content: '';
+                content: "";
             }
 
             &:first-child {
@@ -719,7 +750,7 @@ div#wpcf7r_leads {
     }
 
     .field-wrap {
-        input[type='checkbox']:checked+label+input {
+        input[type="checkbox"]:checked + label + input {
             display: block;
         }
     }
@@ -736,7 +767,7 @@ div#wpcf7r_leads {
         &:after {
             display: block;
             clear: both;
-            content: '';
+            content: "";
         }
 
         .block-title {
@@ -748,7 +779,7 @@ div#wpcf7r_leads {
                 }
             }
 
-            [type='text'][readonly] {
+            [type="text"][readonly] {
                 display: inline-block;
                 width: auto !important;
                 cursor: pointer;
@@ -832,11 +863,11 @@ div#wpcf7r_leads {
         margin-bottom: 10px;
 
         select,
-        [type='number'],
-        [type='email'],
-        [type='password'],
-        [type='url'],
-        [type='text'] {
+        [type="number"],
+        [type="email"],
+        [type="password"],
+        [type="url"],
+        [type="text"] {
             width: 100%;
             height: 38px;
             margin: 0;
@@ -855,7 +886,7 @@ div#wpcf7r_leads {
             clear: both;
         }
 
-        .wp-picker-container .wp-color-result{
+        .wp-picker-container .wp-color-result {
             width: 38px;
             height: 38px;
             overflow: hidden;
@@ -865,7 +896,7 @@ div#wpcf7r_leads {
             border-radius: 50%;
         }
 
-        [type='checkbox'] {
+        [type="checkbox"] {
             margin-top: 1px;
         }
 
@@ -884,7 +915,7 @@ div#wpcf7r_leads {
         &:after {
             display: table;
             clear: both;
-            content: ' ';
+            content: " ";
         }
     }
 
@@ -909,7 +940,7 @@ div#wpcf7r_leads {
         &:after {
             display: table;
             clear: both;
-            content: ' ';
+            content: " ";
         }
 
         .qs-col {
@@ -977,7 +1008,7 @@ div#wpcf7r_leads {
         margin-bottom: 5px;
     }
 
-    .field-wrap-http-build-query-selectively [type='text'] {
+    .field-wrap-http-build-query-selectively [type="text"] {
         margin-top: 10px;
     }
 
@@ -1028,7 +1059,7 @@ div#wpcf7r_leads {
 .page-settings {
     .image-uploader-btn {
         display: block;
-        margin-top: 10PX;
+        margin-top: 10px;
     }
 
     .field-wrap {
@@ -1092,7 +1123,6 @@ div#wpcf7r_leads {
         margin: 0 -10px;
 
         .needs-activation {
-
             .promo-purchase-link,
             .actions .btn-activate {
                 font-size: 18px;
@@ -1125,7 +1155,7 @@ div#wpcf7r_leads {
             border-radius: 0;
 
             &:hover {
-                opacity: .8;
+                opacity: 0.8;
             }
 
             a {
@@ -1154,7 +1184,7 @@ div#wpcf7r_leads {
             border-color: #007cba;
 
             &:hover {
-                opacity: .8;
+                opacity: 0.8;
             }
         }
 
@@ -1203,7 +1233,7 @@ div#wpcf7r_leads {
                 opacity: 1;
             }
 
-            input[type='text'] {
+            input[type="text"] {
                 width: 70%;
                 min-height: 0;
             }
@@ -1259,7 +1289,7 @@ div#wpcf7r_leads {
 
             .dashicons-buddicons-groups:before {
                 position: relative;
-                content: '\f456';
+                content: "\f456";
             }
 
             .promo-version {
@@ -1305,8 +1335,8 @@ div#wpcf7r_leads {
             }
 
             &:hover {
-                -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
-                box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+                -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             }
 
             .promo-box-description {
@@ -1357,7 +1387,7 @@ section.padbox .padbox {
     height: 100%;
     color: #fff;
     visibility: hidden;
-    background: rgba(000, 000, 000, .8);
+    background: rgba(000, 000, 000, 0.8);
     opacity: 0;
     transition: all 500ms ease;
 
@@ -1384,7 +1414,7 @@ section.padbox .padbox {
         background-size: cover;
 
         .rp-contact-form-form {
-            input[type=email] {
+            input[type="email"] {
                 width: 100%;
                 padding: 6px 10px;
             }
@@ -1431,9 +1461,9 @@ section.padbox .padbox {
                 &:before {
                     position: relative;
                     top: 9px;
-                    font-family: 'dashicons';
+                    font-family: "dashicons";
                     font-size: 34px;
-                    content: '\f147';
+                    content: "\f147";
                 }
             }
         }
@@ -1544,7 +1574,7 @@ section.padbox .padbox {
                             background-size: 100%;
 
                             &:hover {
-                                opacity: .8;
+                                opacity: 0.8;
                             }
                         }
                     }
@@ -1759,10 +1789,10 @@ section.padbox .padbox {
         z-index: 999;
         width: 47%;
         height: auto;
-        -webkit-transition: all .15s ease;
-        -moz-transition: all .15s ease;
-        -o-transition: all .15s ease;
-        transition: all .15s ease;
+        -webkit-transition: all 0.15s ease;
+        -moz-transition: all 0.15s ease;
+        -o-transition: all 0.15s ease;
+        transition: all 0.15s ease;
     }
 
     .home-hero .home-hero-image:hover .play-button {
@@ -1879,7 +1909,7 @@ section.padbox .padbox {
         box-shadow: none;
     }
 
-    input[type='checkbox'] {
+    input[type="checkbox"] {
         width: auto;
     }
 
@@ -1911,10 +1941,10 @@ section.padbox .padbox {
             margin-bottom: 10px;
 
             select,
-            [type='number'],
-            [type='email'],
-            [type='url'],
-            [type='text'] {
+            [type="number"],
+            [type="email"],
+            [type="url"],
+            [type="text"] {
                 width: 100%;
                 height: 38px;
                 margin: 0;
@@ -1929,7 +1959,7 @@ section.padbox .padbox {
         font-weight: 600;
         line-height: 1;
         color: #136ef8;
-        letter-spacing: -.5px;
+        letter-spacing: -0.5px;
     }
 
     .home-hero .home-hero-content .home-hero-title {
@@ -1988,14 +2018,13 @@ section.padbox .padbox {
         justify-content: center;
 
         .field-wrap {
-
             textarea,
             select,
-            [type='number'],
-            [type='email'],
-            [type='url'],
-            [type='password'],
-            [type='text'] {
+            [type="number"],
+            [type="email"],
+            [type="url"],
+            [type="password"],
+            [type="text"] {
                 height: 57px;
                 box-sizing: border-box;
                 padding: 0 10px;
@@ -2173,7 +2202,7 @@ section.padbox .padbox {
             color: #bfbfbf;
         }
 
-        input[type=checkbox] {
+        input[type="checkbox"] {
             position: relative;
             top: 3px;
         }
@@ -2208,7 +2237,7 @@ section.padbox .padbox {
         text-align: center;
         background-color: #fff;
         border-radius: 10px;
-        box-shadow: 0 0 50px 0 rgba(50, 50, 50, .1);
+        box-shadow: 0 0 50px 0 rgba(50, 50, 50, 0.1);
         -webkit-transform: translateX(-50%);
         -moz-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
@@ -2277,10 +2306,10 @@ section.padbox .padbox {
         max-width: 110px !important;
         max-height: 35px !important;
         margin: auto;
-        -webkit-transition: all .15s ease;
-        -moz-transition: all .15s ease;
-        -o-transition: all .15s ease;
-        transition: all .15s ease;
+        -webkit-transition: all 0.15s ease;
+        -moz-transition: all 0.15s ease;
+        -o-transition: all 0.15s ease;
+        transition: all 0.15s ease;
     }
 
     .home-hero .home-hero-logos .clients-carousel .owl-stage .owl-item img:hover {

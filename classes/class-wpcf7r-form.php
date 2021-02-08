@@ -609,6 +609,7 @@ class WPCF7R_Form {
 	public function process_actions() {
 		// get all active actions
 		$actions = $this->get_active_actions();
+
 		// prepeare the results array
 		$results = array();
 		// get removed fom data

@@ -22,6 +22,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="image-container">
 		<img src="<?php echo esc_html( $field['value'] ); ?>" alt="" style="max-width:100px;" class="popup-image" />
 		<a title="Set Image" href="javascript:;" class="image-uploader-btn browser button button-hero"><?php _e( 'Select Image', 'wpcf7-redirect' ); ?></a>
+		<a title="Remove image" href="javascript:;" class="image-remove-btn browser button"><span class="dashicons dashicons-no-alt"></span></a>
 		<input type="hidden" class="wpcf7-redirect-<?php echo $field['name']; ?>-fields" placeholder="<?php echo esc_html( $field['placeholder'] ); ?>" name="wpcf7-redirect<?php echo $prefix; ?>[<?php echo $field['name']; ?>]" value="<?php echo esc_html( $field['value'] ); ?>" <?php echo isset( $field['input_attr'] ) ? $field['input_attr'] : ''; ?>>
 	</div>
 	<div class="field-footer">

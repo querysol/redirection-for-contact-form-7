@@ -120,13 +120,13 @@ class WPCF7R_Action_SendMail extends WPCF7R_Action {
 	 * @param  $response
 	 */
 	public function process( $submission ) {
-		$response              = array();
-		$email_to              = $this->get( 'send_to_emails_values' );
-		$email_sender          = $this->get( 'email_sender' );
-		$email_format          = $this->get( 'email_format' );
-		$email_subject         = $this->get( 'email_subject' );
-		$email_attachments     = $this->get( 'email_attachments' );
-		$plain_text            = $this->get( 'plain_text' );
+		$response          = array();
+		$email_to          = $this->get( 'send_to_emails_values' );
+		$email_sender      = $this->get( 'email_sender' );
+		$email_format      = $this->get( 'email_format' );
+		$email_subject     = $this->get( 'email_subject' );
+		$email_attachments = $this->get( 'email_attachments' );
+		$plain_text        = $this->get( 'plain_text' );
 
 		// set the email address to recipient
 		$mail_settings = $this->cf7r_form->cf7_post->get_properties( 'mail' );
@@ -148,7 +148,11 @@ class WPCF7R_Action_SendMail extends WPCF7R_Action {
 		}
 
 		if ( $email_attachments ) {
+
 			$mail_settings['mail']['attachments'] = $email_attachments;
+
+			//add pdfs
+			do_shortcode( $email_attachments );
 		}
 
 		$mail_settings['mail']['use_html'] = ! $plain_text;
@@ -158,6 +162,14 @@ class WPCF7R_Action_SendMail extends WPCF7R_Action {
 		return $result;
 	}
 
+	/**
+	 * Add pdf as attachment to email
+	 *
+	 * @return void
+	 */
+	public function add_pdf_to_email() {
+
+	}
 	/**
 	 * Maybe perform actions before sending results to the user
 	 */
@@ -174,7 +186,12 @@ class WPCF7R_Action_SendMail extends WPCF7R_Action {
 	 * @param $mail
 	 */
 	public function send_mail( $mail ) {
+		do_action( 'wpcf7r_before_send_mail', $mail );
+
 		$result = WPCF7_Mail::send( $mail, 'mail' );
+
+		do_action( 'wpcf7r_after_send_mail', $mail, $result );
+
 		return $result;
 	}
 }

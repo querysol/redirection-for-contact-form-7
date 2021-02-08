@@ -12,6 +12,8 @@ class WPCF7R_Action {
 	// Saved data from validation action to submission action.
 	public static $data;
 
+	// save refrence to global objects.
+	public static $global_options;
 	/**
 	 * Class constructor
 	 * Set required parameters
@@ -90,6 +92,19 @@ class WPCF7R_Action {
 	 */
 	public function set_lead_id( $lead_id ) {
 		self::$lead_id = $lead_id;
+	}
+
+	/**
+	 * save a reference to a global feature
+	 *
+	 * @param $lead_id
+	 */
+	public function set_global_option( $key, $value ) {
+		self::$global_options[ $key ] = $value;
+	}
+
+	public function get_global_option( $key ) {
+		return isset( self::$global_options[ $key ] ) ? self::$global_options[ $key ] : '';
 	}
 
 	/**

@@ -113,7 +113,9 @@ var wpcf7_redirect_admin;
 			//init drag and drop features
 			this.init_draggable();
 			this.renumber_rows();
+
 			this.admin_validations = new Wpcf7_admin_validations($);
+
 			this.init_select2();
 
 			this.init_media_field();
@@ -255,6 +257,13 @@ var wpcf7_redirect_admin;
 				imgIdInput = $(this).parent().find('input[type=hidden]');
 				$imgContainer = $(this).parent();
 				file_frame.open();
+			});
+
+			$(document.body).on('click', '.image-remove-btn', function () {
+				$imgIdInput = $(this).parent().find('input[type=hidden]');
+				$imgContainer = $(this).parent();
+				$imgContainer.find('img').remove();
+				$imgIdInput.val('');
 			});
 		}
 
