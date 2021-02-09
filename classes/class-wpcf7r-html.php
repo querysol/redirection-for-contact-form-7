@@ -288,6 +288,9 @@ class WPCF7R_Html {
 			case 'media':
 				$template = WPCF7_PRO_REDIRECT_FIELDS_PATH . 'field-media.php';
 				break;
+			case 'upload':
+				$template = WPCF7_PRO_REDIRECT_FIELDS_PATH . 'field-upload.php';
+				break;
 			case 'preview':
 				$template = WPCF7_PRO_REDIRECT_FIELDS_PATH . 'field-preview.php';
 				break;

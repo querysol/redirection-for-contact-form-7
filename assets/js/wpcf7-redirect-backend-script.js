@@ -151,9 +151,15 @@ var wpcf7_redirect_admin;
 			file_frame.on('insert', function (e) {
 				// Get media attachment details from the frame state
 				var attachment = file_frame.state().get('selection').first().toJSON();
-				$imgContainer.find('.popup-image').remove();
-				// Send the attachment URL to our custom image input field.
-				$imgContainer.prepend('<img src="' + attachment.url + '" alt="" style="max-width:100px;" class="popup-image"/>');
+
+				if ($imgContainer.hasClass('file-container')) {
+					$imgContainer.find('.file-url').val(attachment.url);
+				} else {
+					$imgContainer.find('.popup-image').remove();
+					// Send the attachment URL to our custom image input field.
+					$imgContainer.prepend('<img src="' + attachment.url + '" alt="" style="max-width:100px;" class="popup-image"/>');
+				}
+
 				// Send the attachment id to our hidden input
 				imgIdInput.val(attachment.url).change();
 			});
@@ -167,7 +173,14 @@ var wpcf7_redirect_admin;
 			$(document.body).on('click', '.image-remove-btn', function () {
 				$imgIdInput = $(this).parent().find('input[type=hidden]');
 				$imgContainer = $(this).parent();
-				$imgContainer.find('img').remove();
+
+				if ($imgContainer.hasClass('file-container')) {
+					$imgContainer.find('.file-url').val('');
+				} else {
+					$imgContainer.find('img').remove();
+				}
+
+
 				$imgIdInput.val('');
 			});
 		}
@@ -677,7 +690,7 @@ var wpcf7_redirect_admin;
 			if ('wpcf7r_add_action' === action || 'wpcf7r_duplicate_action' == action) {
 				$('[data-wrapid=' + params.rule_id + '] #the_list').append(response.action_row);
 
-				$new_action_wrap = $('[data-wrapid=' + params.rule_id + '] #the_list > tr').last();
+				$new_action_wrap = $('[data-wrapid=' + params.rule_id + '] #the_list > tr.action-container').last();
 
 				_this.init_select2();
 				_this.renumber_rows();
