@@ -58,6 +58,14 @@ function wpcf7_redirect_get_all_extensions_list() {
 			'icon'        => WPCF7_PRO_REDIRECT_BUILD_PATH . 'images/icon7.png',
 			'classname'   => 'WPCF7_Redirect_Conditional_Logic',
 		),
+		'wpcf7r-create-pdf' => array(
+			'name'        => 'wpcf7r-create-pdf',
+			'filename'    => 'class-wpcf7r-action-create-pdf',
+			'title'       => __( 'Create PDF', 'wpcf7-redirect' ),
+			'description' => __( 'Easily create and send PDF files generated automaticaly.', 'wpcf7-redirect' ),
+			'icon'        => WPCF7_PRO_REDIRECT_BUILD_PATH . 'images/pdf-icon.png',
+			'classname'   => 'WPCF7R_Action_Create_pdf',
+		),
 		'wpcf7r-paypal'            => array(
 			'name'        => 'wpcf7r-paypal',
 			'filename'    => 'class-wpcf7r-action-paypal.php',

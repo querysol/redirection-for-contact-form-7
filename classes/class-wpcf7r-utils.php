@@ -162,21 +162,12 @@ class WPCF7r_Utils {
 
 			$post_meta_infos = $wpdb->get_results( $sql );
 
-			if ( count( $post_meta_infos ) !== 0 ) {
-				$sql_query = "INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value) ";
-
-				foreach ( $post_meta_infos as $meta_info ) {
-					$meta_key = $meta_info->meta_key;
-					if ( '_wp_old_slug' === $meta_key ) {
-						continue;
-					}
-					$meta_value      = addslashes( $meta_info->meta_value );
-					$sql_query_sel[] = "SELECT $new_post_id, '$meta_key', '$meta_value'";
+			foreach ( $post_meta_infos as $meta_info ) {
+				if ( '_wp_old_slug' === $meta_info->meta_key ) {
+					continue;
 				}
 
-				$sql_query .= implode( ' UNION ALL ', $sql_query_sel );
-
-				$wpdb->query( $sql_query );
+				update_post_meta( $new_post_id , $meta_info->meta_key, maybe_unserialize( $meta_info->meta_value ) );
 			}
 
 			return $new_post_id;

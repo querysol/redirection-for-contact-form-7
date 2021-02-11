@@ -80,7 +80,7 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 
 = 2.3.4 =
 * Fixed jQuery error when adding an action with wysiwyg Editor
-* Added data name attribute for 
+* Fixed duplicate post functionality
 * Added support for pdf create action
 
 = 2.3.3 =
