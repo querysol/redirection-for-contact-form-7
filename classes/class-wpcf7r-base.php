@@ -178,7 +178,7 @@ class WPCF7R_Base {
 	 * Convert all old plugin settings to actions
 	 */
 	public function migrate_all_forms() {
-		if ( current_user_can( 'manage_options' ) ) {
+		if ( current_user_can( 'administrator' ) && wpcf7_validate_nonce() ) {
 			WPCF7r_Utils::auto_migrate( 'migrate_from_cf7_redirect', true );
 		}
 	}
@@ -189,7 +189,7 @@ class WPCF7R_Base {
 	 * @return void
 	 */
 	public function wpcf7r_reset_settings() {
-		if ( current_user_can( 'manage_options' ) ) {
+		if ( current_user_can( 'administrator' ) && wpcf7_validate_nonce() ) {
 			$options_list = array(
 				'wpcf7r-extensions-list-updated',
 				'wpcf7r-extensions-list',

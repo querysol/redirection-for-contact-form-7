@@ -652,7 +652,7 @@ class WPCF7r_Utils {
 	 * Close banner
 	 */
 	public function close_banner() {
-		if ( current_user_can( 'wpcf7_edit_contact_form' ) && wpcf7_validate_nonce() ) {
+		if ( current_user_can( 'administrator' ) && wpcf7_validate_nonce() ) {
 			$this->update_option( 'last_banner_displayed', $this->banner_version );
 		}
 	}
