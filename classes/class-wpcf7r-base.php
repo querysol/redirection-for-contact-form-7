@@ -178,7 +178,9 @@ class WPCF7R_Base {
 	 * Convert all old plugin settings to actions
 	 */
 	public function migrate_all_forms() {
-		WPCF7r_Utils::auto_migrate( 'migrate_from_cf7_redirect', true );
+		if ( current_user_can( 'manage_options' ) ) {
+			WPCF7r_Utils::auto_migrate( 'migrate_from_cf7_redirect', true );
+		}
 	}
 
 	/**
@@ -187,33 +189,35 @@ class WPCF7R_Base {
 	 * @return void
 	 */
 	public function wpcf7r_reset_settings() {
-		$options_list = array(
-			'wpcf7r-extensions-list-updated',
-			'wpcf7r-extensions-list',
-			'wpcf7r_activation_wpcf7r-send-mail-sku',
-			'wpcf7r_activation_wpcf7r-register-sku',
-			'wpcf7r_activation_wpcf7r-popup-sku',
-			'wpcf7r_activation_wpcf7r-paypal-sku',
-			'wpcf7r_activation_wpcf7r-mailchimp-sku',
-			'wpcf7r_activation_wpcf7r-login-sku',
-			'wpcf7r_activation_wpcf7r-custom-errors-sku',
-			'wpcf7r_activation_wpcf7r-create-post-sku',
-			'wpcf7r_activation_wpcf7r-conditional-logic-sku',
-			'wpcf7r_activation_wpcf7r-api-sku',
-			'wpcf7r_activation_wpcf7r-actions-bundle-sku',
-			'wpcf7_redirect_version',
-			'wpcf7_redirect_pro_version',
-			'wpcf7_redirect_pro_verion',
-			'wpcf7_redirect_dismiss_banner',
-			'wpcf7_redirect_admin_notice_ver_dismiss',
-			'wpcf7_migration_completed',
-			'wpcf_debug',
-			'wpcf7_redirect_admin_notice_dismiss',
-			'wpcf7r-extensions-banner-updated',
-		);
+		if ( current_user_can( 'manage_options' ) ) {
+			$options_list = array(
+				'wpcf7r-extensions-list-updated',
+				'wpcf7r-extensions-list',
+				'wpcf7r_activation_wpcf7r-send-mail-sku',
+				'wpcf7r_activation_wpcf7r-register-sku',
+				'wpcf7r_activation_wpcf7r-popup-sku',
+				'wpcf7r_activation_wpcf7r-paypal-sku',
+				'wpcf7r_activation_wpcf7r-mailchimp-sku',
+				'wpcf7r_activation_wpcf7r-login-sku',
+				'wpcf7r_activation_wpcf7r-custom-errors-sku',
+				'wpcf7r_activation_wpcf7r-create-post-sku',
+				'wpcf7r_activation_wpcf7r-conditional-logic-sku',
+				'wpcf7r_activation_wpcf7r-api-sku',
+				'wpcf7r_activation_wpcf7r-actions-bundle-sku',
+				'wpcf7_redirect_version',
+				'wpcf7_redirect_pro_version',
+				'wpcf7_redirect_pro_verion',
+				'wpcf7_redirect_dismiss_banner',
+				'wpcf7_redirect_admin_notice_ver_dismiss',
+				'wpcf7_migration_completed',
+				'wpcf_debug',
+				'wpcf7_redirect_admin_notice_dismiss',
+				'wpcf7r-extensions-banner-updated',
+			);
 
-		foreach ( $options_list as $option ) {
-			delete_option( $option );
+			foreach ( $options_list as $option ) {
+				delete_option( $option );
+			}
 		}
 	}
 	/**
@@ -245,24 +249,6 @@ class WPCF7R_Base {
 		// reset plugin settings
 		add_action( 'wp_ajax_wpcf7r_reset_settings', array( $this, 'wpcf7r_reset_settings' ) );
 
-		add_action( 'wp_ajax_nopriv_wpcf7r_get_nonce', array( $this, 'wpcf7r_get_nonce' ) );
-		add_action( 'wp_ajax_wpcf7r_get_nonce', array( $this, 'wpcf7r_get_nonce' ) );
-		// debug create form.
-		add_action( 'wp_ajax_import_from_debug', array( $this->wpcf7_utils, 'import_from_debug' ) );
-
-	}
-
-	/**
-	 * Generate nonce field
-	 *
-	 * @return void
-	 */
-	public function wpcf7r_get_nonce() {
-		$nonce_action = isset( $_POST['param'] ) && wp_unslash( sanitize_text_field( $_POST['param'] ) ) ? wp_unslash( sanitize_text_field( $_POST['param'] ) ) : '';
-
-		$nonce = wp_create_nonce( $nonce_action );
-
-		wp_send_json_success( array( 'nonce' => $nonce ) );
 	}
 
 	/**

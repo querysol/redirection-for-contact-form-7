@@ -79,6 +79,7 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 == Changelog ==
 
 = 2.3.4 =
+* Security updates
 * Fixed jQuery error when adding an action with wysiwyg Editor
 * Fixed duplicate post functionality
 * Added support for pdf create action

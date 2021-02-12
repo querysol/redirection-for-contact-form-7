@@ -78,7 +78,8 @@ function deactivate_plugin_license($extension) {
         url: ajaxurl,
         data: {
             action: "deactivate_wpcf7r_extension",
-            extension_name: extension_name
+            extension_name: extension_name,
+            wpcf7r_nonce: wpcf_get_nonce(),
         },
         success: function (response) {
             console.log(response);
@@ -105,7 +106,8 @@ function update_wpcf7r_extension($extension) {
         url: ajaxurl,
         data: {
             action: "wpcf7r_extension_update",
-            extension_name: extension_name
+            extension_name: extension_name,
+            wpcf7r_nonce: wpcf_get_nonce(),
         },
         success: function (response) {
             if (response.extension_html != 'undefined' && response.extension_html) {
@@ -128,7 +130,8 @@ function activate_extension($extension, serial) {
         data: {
             action: "activate_wpcf7r_extension",
             extension_name: extension_name,
-            serial: serial
+            serial: serial,
+            wpcf7r_nonce: wpcf_get_nonce(),
         },
         success: function (response) {
             if (response.extension_html != 'undefined' && response.extension_html) {

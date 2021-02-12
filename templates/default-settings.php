@@ -12,7 +12,7 @@ $actions = $this->get_actions( $rule_id );
 <h2>
 	<?php _e( 'Submission Actions', 'wpcf7-redirect' ); ?>
 </h2>
-
+<?php wp_nonce_field( 'manage_cf7_redirect', 'actions-nonce' ); ?>
 <legend>
 	<?php _e( 'You can add actions that will be fired on submission. For details and support check', 'wpcf7-redirect' ); ?> <a href="https://redirection-for-contact-form7.com/" target="_blank"><?php _e( 'official website', 'wpcf7-redirect' ); ?></a>.
 </legend>

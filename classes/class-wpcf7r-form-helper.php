@@ -154,16 +154,20 @@ class WPCF7r_Form_Helper {
 	 */
 	public function maybe_update_extension() {
 
-		$extension_name = isset( $_POST['extension_name'] ) && $_POST['extension_name'] ? sanitize_text_field( $_POST['extension_name'] ) : '';
+		$results = array();
 
-		if ( $extension_name ) {
-			$extension = $this->get_extension_object( $extension_name );
+		if ( current_user_can( 'administrator' ) && wpcf7_validate_nonce() ) {
+			$extension_name = isset( $_POST['extension_name'] ) && $_POST['extension_name'] ? sanitize_text_field( $_POST['extension_name'] ) : '';
 
-			if ( $extension->has_update() ) {
-				$results = $extension->save_extension_file();
+			if ( $extension_name ) {
+				$extension = $this->get_extension_object( $extension_name );
+
+				if ( $extension->has_update() ) {
+					$results = $extension->save_extension_file();
+				}
+
+				$results['html'] = $extension->ajax_extension_html();
 			}
-
-			$results['html'] = $extension->ajax_extension_html();
 		}
 
 		wp_send_json( $results );
@@ -245,19 +249,23 @@ class WPCF7r_Form_Helper {
 	 */
 	public function deactivate_plugin_license() {
 
-		if ( ! isset( $_POST['extension_name'] ) ) {
+		$results = array();
 
-			$results = array(
-				'message' => __( 'Missing name or serial', 'wpcf7-redirect' ),
-			);
+		if ( current_user_can( 'wpcf7_edit_contact_form' ) && wpcf7_validate_nonce() ) {
+			if ( ! isset( $_POST['extension_name'] ) ) {
 
-		} else {
+				$results = array(
+					'message' => __( 'Missing name or serial', 'wpcf7-redirect' ),
+				);
 
-			$extentsion_settings = $this->extensions[ $_POST['extension_name'] ];
+			} else {
 
-			if ( $extentsion_settings ) {
-				$extentsion = new WPCF7R_Extension( $extentsion_settings );
-				$results    = $extentsion->deactivate_license();
+				$extentsion_settings = $this->extensions[ $_POST['extension_name'] ];
+
+				if ( $extentsion_settings ) {
+					$extentsion = new WPCF7R_Extension( $extentsion_settings );
+					$results    = $extentsion->deactivate_license();
+				}
 			}
 		}
 
@@ -271,25 +279,26 @@ class WPCF7r_Form_Helper {
 	 * @return void
 	 */
 	public function activate_extension() {
-
-		if ( ! isset( $_POST['extension_name'] ) || ! isset( $_POST['serial'] ) ) {
-			$results = array(
-				'message' => __( 'Missing name or serial', 'wpcf7-redirect' ),
-			);
-		} else {
-
-			$extentsion_settings = $this->extensions[ $_POST['extension_name'] ];
-
-			if ( $extentsion_settings ) {
-				$extentsion = new WPCF7R_extension( $extentsion_settings );
-				$serial     = sanitize_text_field( $_POST['serial'] );
-				$results    = $extentsion->activate( $serial );
+		if ( current_user_can( 'wpcf7_edit_contact_form' ) && wpcf7_validate_nonce() ) {
+			if ( ! isset( $_POST['extension_name'] ) || ! isset( $_POST['serial'] ) ) {
+				$results = array(
+					'message' => __( 'Missing name or serial', 'wpcf7-redirect' ),
+				);
 			} else {
-				$results['extension_html'] = __( 'Somthing went wrong', 'wpcf7-redirect' );
-			}
-		}
 
-		wp_send_json( $results );
+				$extentsion_settings = $this->extensions[ $_POST['extension_name'] ];
+
+				if ( $extentsion_settings ) {
+					$extentsion = new WPCF7R_extension( $extentsion_settings );
+					$serial     = sanitize_text_field( $_POST['serial'] );
+					$results    = $extentsion->activate( $serial );
+				} else {
+					$results['extension_html'] = __( 'Somthing went wrong', 'wpcf7-redirect' );
+				}
+			}
+
+			wp_send_json( $results );
+		}
 	}
 
 	/**
@@ -607,46 +616,50 @@ class WPCF7r_Form_Helper {
 	 * Get coupon ajax function
 	 */
 	public function get_coupon() {
-		$data = $_POST['data'];
+		$results = array();
 
-		$email = isset( $data['email'] ) && is_email( $data['email'] ) ? $data['email'] : false;
+		if ( current_user_can( 'wpcf7_edit_contact_form' ) && wpcf7_validate_nonce() ) {
+			$data = $_POST['data'];
 
-		if ( ! $email ) {
-			$results = array(
-				'status'  => 'rp-error',
-				'message' => 'Please enter a valid email.',
-			);
+			$email = isset( $data['email'] ) && is_email( $data['email'] ) ? $data['email'] : false;
 
-			wp_send_json( $results );
-		} else {
-			$ip     = $_SERVER['REMOTE_ADDR'];
-			$url    = home_url();
-			$accept = sanitize_text_field( $data['get_offers'] );
-			$params = array(
-				'ip_address' => $ip,
-				'accept'     => $accept,
-				'email'      => $email,
-				'url'        => $url,
-			);
-
-			$params = http_build_query( $params );
-
-			$endpoint = WPCF7_PRO_REDIRECT_PLUGIN_PAGE_URL . "wp-json/api-v1/get-coupon?{$params}";
-
-			$response = wp_remote_post( $endpoint );
-
-			$body = json_decode( wp_remote_retrieve_body( $response ), true );
-
-			if ( isset( $body['message'] ) ) {
+			if ( ! $email ) {
 				$results = array(
-					'status'  => 'rp-success',
-					'message' => $body['message'],
+					'status'  => 'rp-error',
+					'message' => 'Please enter a valid email.',
 				);
-			} elseif ( isset( $body['redirect'] ) ) {
-				$results = array(
-					'status' => 'rp-success',
-					'url'    => $body['redirect'],
+
+				wp_send_json( $results );
+			} else {
+				$ip     = $_SERVER['REMOTE_ADDR'];
+				$url    = home_url();
+				$accept = sanitize_text_field( $data['get_offers'] );
+				$params = array(
+					'ip_address' => $ip,
+					'accept'     => $accept,
+					'email'      => $email,
+					'url'        => $url,
 				);
+
+				$params = http_build_query( $params );
+
+				$endpoint = WPCF7_PRO_REDIRECT_PLUGIN_PAGE_URL . "wp-json/api-v1/get-coupon?{$params}";
+
+				$response = wp_remote_post( $endpoint );
+
+				$body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				if ( isset( $body['message'] ) ) {
+					$results = array(
+						'status'  => 'rp-success',
+						'message' => $body['message'],
+					);
+				} elseif ( isset( $body['redirect'] ) ) {
+					$results = array(
+						'status' => 'rp-success',
+						'url'    => $body['redirect'],
+					);
+				}
 			}
 		}
 

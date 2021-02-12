@@ -357,8 +357,6 @@ var wpcf7_redirect_admin;
 			$(document.body).on('click', this.pro_banner_close_selector, this.pro_banner_close.bind(this));
 			//toggle mail tags
 			$(document.body).on('click', this.mail_tags_toggle, this.toggle_mail_tags.bind(this));
-			//create an enviorment based on debug
-			$(document.body).on('click', this.debug_import_button_selector, this.import_debug.bind(this));
 			//send debug info
 			$(document.body).on('click', this.debug_send_button_selector, this.send_debug_info.bind(this));
 			//duplicate action
@@ -394,24 +392,7 @@ var wpcf7_redirect_admin;
 				$('.approve-debug').parent().addClass('error');
 			}
 		}
-		/**
-		 * import and create forms and actions based on debug info
-		 * @param {EVENT} e 
-		 */
-		this.import_debug = function (e) {
-			e.preventDefault();
 
-			var $clicked_button = $(e.currentTarget);
-
-			params = {
-				'debug_info': $('#debug-info').val()
-			};
-
-			this.make_ajax_call('import_from_debug', params, 'after_ajax_call');
-
-			this.show_action_loader($clicked_button);
-
-		}
 		/**
 		 * Gets the available mailchimp lists
 		 * @param  {[type]} e [description]
@@ -1081,13 +1062,16 @@ var wpcf7_redirect_admin;
 		 * @return {[type]}        [description]
 		 */
 		this.make_ajax_call = function (action, params) {
+			var _this = this;
+
 			jQuery.ajax({
 				type: "post",
 				dataType: "json",
 				url: ajaxurl,
 				data: {
 					action: action,
-					data: params
+					data: params,
+					wpcf7r_nonce: wpcf_get_nonce(),
 				},
 				success: function (response) {
 					$(document.body).trigger('wpcf7r_after_ajax_call', [params, response, action]);
@@ -1127,6 +1111,7 @@ var wpcf7_redirect_admin;
 				url: ajaxurl,
 				data: {
 					action: 'get_coupon',
+					wpcf7r_nonce: wpcf_get_nonce(),
 					data: {
 						email: $('[name="rp_user_email"]').val(),
 						get_offers: get_offers
@@ -1159,3 +1144,7 @@ var wpcf7_redirect_admin;
 		$(document.body).trigger('wpcf7r-loaded', wpcf7_redirect_admin);
 	});
 })(jQuery);
+
+function wpcf_get_nonce() {
+	return jQuery('[name=actions-nonce]').val();
+}

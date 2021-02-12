@@ -32,6 +32,17 @@ function wpcf7_get_extensions() {
 }
 
 /**
+ * Verify nonce
+ *
+ * @return void
+ */
+function wpcf7_validate_nonce() {
+	check_admin_referer( 'manage_cf7_redirect', 'wpcf7r_nonce' );
+
+	return true;
+}
+
+/**
  * Get all available extensions definitions.
  *
  * @return void
@@ -58,7 +69,7 @@ function wpcf7_redirect_get_all_extensions_list() {
 			'icon'        => WPCF7_PRO_REDIRECT_BUILD_PATH . 'images/icon7.png',
 			'classname'   => 'WPCF7_Redirect_Conditional_Logic',
 		),
-		'wpcf7r-create-pdf' => array(
+		'wpcf7r-create-pdf'        => array(
 			'name'        => 'wpcf7r-create-pdf',
 			'filename'    => 'class-wpcf7r-action-create-pdf',
 			'title'       => __( 'Create PDF', 'wpcf7-redirect' ),
@@ -485,7 +496,7 @@ function is_wpcf7r_debug() {
  *
  * @return [boolean] - true if this is the edit screen.
  */
-function wpcf7r_is_wpcf7_edit(){
+function wpcf7r_is_wpcf7_edit() {
 	global $post;
 
 	$wpcf7_page          = isset( $_GET['page'] ) && 'wpcf7' === $_GET['page'] && isset( $_GET['post'] ) && $_GET['post'];
