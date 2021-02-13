@@ -212,6 +212,7 @@ var wpcf7_redirect_admin;
 			this.validate_salesforce_app_details = '.wpcf7-redirect-validate_connection-fields';
 			this.debug_import_button_selector = '.reacreate-from-debug';
 			this.debug_send_button_selector = '.send-debug-info'
+
 		}
 
 		/**
@@ -1043,12 +1044,18 @@ var wpcf7_redirect_admin;
 		 */
 		this.add_and_row = function (e) {
 			e.preventDefault();
-			this.new_row_counter++;
 
 			$clicked_button = $(e.currentTarget);
 			action_id = this.get_block_action_id($clicked_button);
 			block_id = 'block_1';
 			group_id = $clicked_button.parents('[data-group-id]').first().data('group-id');
+
+			if (!this.new_row_counter) {
+				$repeater_block = $clicked_button.parents('.repeater-table');
+				this.new_row_counter = $repeater_block.find('.row-template').length;
+			}
+
+			this.new_row_counter++;
 
 			$(wpcfr_template.row_html).find(this.add_and_selector).remove();
 
