@@ -3,7 +3,7 @@ Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redi
 Contributors: yuvalsabar, regevlio
 Requires at least: 5.1.0
 Tested up to: 5.6
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,6 +77,9 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 5. Extensions tab
 
 == Changelog ==
+
+= 2.3.5 =
+* Fix preview of checkbox fields on leads list
 
 = 2.3.4 =
 * Security updates
