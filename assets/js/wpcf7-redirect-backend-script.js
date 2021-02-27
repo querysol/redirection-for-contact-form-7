@@ -1153,5 +1153,5 @@ var wpcf7_redirect_admin;
 })(jQuery);
 
 function wpcf_get_nonce() {
-	return jQuery('[name=actions-nonce]').val();
+	return jQuery('[name=actions-nonce]').val() ? jQuery('[name=actions-nonce]').val() : jQuery('[name=_wpcf7nonce]').val();
 }

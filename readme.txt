@@ -80,6 +80,8 @@ No. One of the reasons we developed this plugin, is because on_send_ok is now de
 
 = 2.3.5 =
 * Fix preview of checkbox fields on leads list
+* Fix nonce issues on extensions page
+* Fix send file to api [{fieldname}-filename] [{fieldname}-base_64_file] [{fieldname}-path]
 
 = 2.3.4 =
 * Security updates
