@@ -2,7 +2,7 @@
 Tags: contact form 7 redirect, contact form 7 thank you page, redirect cf7, redirect contact form 7, contact form 7 success page, cf7 redirect, registration form, mailchimp, login form, conditional redirect, cms integration, conversions, save leads, paypal
 Contributors: yuvalsabar, regevlio
 Requires at least: 5.1.0
-Tested up to: 5.6
+Tested up to: 5.7
 Stable tag: 2.3.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
